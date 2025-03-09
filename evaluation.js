@@ -40,5 +40,5 @@ function taskManagementSystem(){
 const run = taskManagementSystem()
 
 run.addTask("task1").addTask("task2").completeTask("task3")
-    .addTask("task3").removeTask("task1").listTask()
+    .addTask("task3").removeTask("task1")
     .filterStatus("pending").countTask().listTask()
