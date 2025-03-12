@@ -6,13 +6,15 @@ const movies = [
     { title: "Kabir Singh", genre: "Romance", rating: 6.9, watchTime: 150 }
   ];
 
+// Objective; Output 1: List of Highly Rated Movies with watchTime in hrs
 let movieOut = movies
-    .filter(movie => movie.rating>7.5)
-    .map(movie => ({
+    .filter(movie => movie.rating>7.5)  // .filter to remove other movies
+    .map(movie => ({    // converting watchTime to hrs
         title: movie.title,
         watchTime: parseFloat((movie.watchTime/60).toFixed(2))
     }))
 
+// Output 2: total watchTime for movies in Output 1
 let totalWatch = movieOut.reduce((acc, movie) => acc + movie.watchTime, 0)
 
 console.log(movieOut)
