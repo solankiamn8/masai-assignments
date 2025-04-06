@@ -139,6 +139,73 @@ margin-top: 15px;
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
-
+.project-card button{
+    background-color: navy;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.project-card button:hover{
+    background-color: darkblue;
+    transform: scale(1.04);
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table, th, td{
+    border: 1px sold lightgrey;
+    padding: 10px;
+    text-align: left;
+}
+footer{
+    background: linear-gradient(135deg, darkgreen, mediumblue);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+footer h2{
+    margin-bottom: 20px;
+}
+footer form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+footer form label{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    color: gray;
+}
+footer input, footer, textarea{
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+footer button{
+    padding: 10px;
+    background: white;
+    border: none;
+    color: navy;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+footer button:hover{
+    background: lightgray;
+    transform: scale(1.02);
+}
+.footer-note{
+    margin-top: 30px;
+    font-size: 14px;
+    color: darkgrey;
+}
 
 
