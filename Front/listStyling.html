@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Styling</title>
+    <style>
+        ol li:first-child {
+            font-weight: bold;
+        }
+        ol li:first-child + li {
+            background-color: white;
+        }
+        ol li:nth-child(n+4) {
+            font-style: italic;
+        }
+        ol li:hover {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <li>First item (bold)</li>
+        <li>Second item (gray background)</li>
+        <li>Third item</li>
+        <li>Fourth item (italic)</li>
+        <li>Fifth item (italic)</li>
+    </ol>
+</body>
+</html>

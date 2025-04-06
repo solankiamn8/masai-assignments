@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        nav {
+            background-color: #333;
+            padding: 1rem;
+            font-family: Arial, sans-serif;
+        }
+        nav > section {
+            display: inline-block;
+            margin: 0 2rem;
+            vertical-align: top;
+        }
+        nav > section > h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        nav a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        /* Section-specific link colors using descendant combinators */
+        nav section.products a {
+            color: #ff9999;
+        }
+        nav section.services a {
+            color: #99ff99;
+        }
+        nav section.company a {
+            color: #9999ff;
+        }
+        
+        nav > section > a {
+            font-weight: bold;
+            border-bottom: 1px solid currentColor;
+        }
+        nav section ul a {
+            font-size: 0.9rem;
+            padding-left: 1rem;
+        }
+        nav a:hover {
+            transform: translateX(5px);
+            opacity: 0.8;
+        }
+        nav a:active {
+            transform: translateX(5px) scale(0.95);
+        }
+        nav a[href^="https"] {
+            color: gold !important;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <section class="products">
+            <h3>Products</h3>
+            <a href="/products" target="_blank">All Products</a>
+            <ul>
+                <li><a href="/products/electronics" target="_blank">Electronics</a></li>
+                <li><a href="https://external.store/clothing" target="_blank">Clothing</a></li>
+            </ul>
+        </section>
+        <section class="services">
+            <h3>Services</h3>
+            <a href="/services" target="_blank">Our Services</a>
+            <ul>
+                <li><a href="/services/consulting" target="_blank">Consulting</a></li>
+                <li><a href="https://partner.company/support" target="_blank">Support</a></li>
+            </ul>
+        </section>
+        <section class="company">
+            <h3>Company</h3>
+            <a href="/about" target="_blank">About Us</a>
+            <ul>
+                <li><a href="/about/team" target="_blank">Our Team</a></li>
+                <li><a href="http://blog.company.com" target="_blank">Blog</a></li>
+            </ul>
+        </section>
+    </nav>
+</body>
+</html>
