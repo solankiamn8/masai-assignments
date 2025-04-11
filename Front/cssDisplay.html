@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Display Properties</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    .block-element {
+      display: block;
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 10px;
+      background-color: #ffcccc;
+      border: 3px solid #ff0000;
+    }
+
+    .inline-element {
+      display: inline;
+      background-color: #ccffcc;
+      padding: 10px;
+      margin-right: 10px;
+      border: 2px solid #00cc00;
+    }
+
+    .inline-block-element {
+      display: inline-block;
+      width: 150px;
+      height: 100px;
+      padding: 10px;
+      margin-right: 10px;
+      background-color: #ccccff;
+      border: 2px solid #0000cc;
+    }
+
+    .hidden-element {
+      display: none;
+      background-color: #ffffcc;
+      padding: 20px;
+      border: 3px solid #cccc00;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CSS Display Property Demonstration</h1>
+
+  <div class="container">
+    <div class="block-element">
+      <strong>Block Element</strong>
+    </div>
+
+    <div class="inline-element">
+      <strong>Inline Element</strong>
+    </div>
+    <div class="inline-element">
+      <strong>Inline Element</strong>
+    </div>
+
+    <div class="inline-block-element">
+      <strong>Inline-block Element</strong>
+    </div>
+
+    <div class="hidden-element">
+      <strong>Hidden Element</strong>
+    </div>
+  </div>
+
+</body>
+</html>
