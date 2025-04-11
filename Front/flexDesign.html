@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section h1 {
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .category {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        .category img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .category div {
+            font-size: 14px;
+            color: #555;
+        }
+        .brand-section {
+            margin-bottom: 20px;
+        }
+        .brand {
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            font-size: 16px;
+            color: #222;
+        }
+        .products {
+            display: flex;
+            gap: 15px;
+        }
+        .product {
+            flex: 1;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        .product div {
+            font-size: 14px;
+            color: #555;
+        }
+        .explore {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .explore:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Decor Section -->
+        <div class="section">
+            <h1>Revamp your home in style</h1>
+            <div class="categories">
+                <div class="category">
+                    <img src="https://i.imgur.com/JqYeYnW.jpg" alt="Cushion covers">
+                    <div>Cushion covers, bedsheets & more</div>
+                </div>
+                <div class="category">
+                    <img src="https://i.imgur.com/mXJO8Ld.jpg" alt="Figurines">
+                    <div>Figurines, vases & more</div>
+                </div>
+                <div class="category">
+                    <img src="https://i.imgur.com/5WXW3bZ.jpg" alt="Home storage">
+                    <div>Home storage</div>
+                </div>
+                <div class="category">
+                    <img src="https://i.imgur.com/Lb2kQhS.jpg" alt="Lighting">
+                    <div>Lighting solutions</div>
+                </div>
+            </div>
+            <a href="#" class="explore">Explore all</a>
+        </div>
+
+        <!-- Headphones Section -->
+        <div class="section">
+            <h1>Starting ₹149 | Headphones</h1>
+            
+            <div class="brand-section">
+                <div class="brand">BOULT</div>
+                <div class="products">
+                    <div class="product">
+                        <img src="https://i.imgur.com/V4XcY7t.jpg" alt="BOULT Headphones">
+                        <div>Starting ₹249 | boAt</div>
+                    </div>
+                    <div class="product">
+                        <img src="https://i.imgur.com/3fJqW9Q.jpg" alt="BOULT Headphones">
+                        <div>Starting ₹349 | boutt</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="brand-section">
+                <div class="brand">NOISE</div>
+                <div class="products">
+                    <div class="product">
+                        <img src="https://i.imgur.com/9wCQzYD.jpg" alt="NOISE Headphones">
+                        <div>Starting ₹649 | Noise</div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="explore">See all offers</a>
+            
+            <div class="brand-section">
+                <div class="brand">ZEBRONICS</div>
+                <div class="products">
+                    <div class="product">
+                        <img src="https://i.imgur.com/2mD3Pqk.jpg" alt="ZEBRONICS Headphones">
+                        <div>Starting ₹149 | Zebronics</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
