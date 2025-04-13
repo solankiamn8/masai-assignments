@@ -3,10 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Webpage</title>
+    <style>
+        img{
+            width: 100px;
+        }
+        nav{
+            border: 2px solid red;
+        }
+        nav>div{
+            border: 2px solid black;
+            display: inline-block;
+        }
+        nav>div:nth-of-type(2){
+            margin-left: 40%;
+        }
+        #winning_formula div{   
+            border: 2px solid red;
+            display: inline-block;
+        }
+        #winning_formula .cards>div{
+            border: 2px solid red;
+            margin: 15px;
+            padding: 15px;
+        }
+        div#box{
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            background-color: lightgray;
+        }
+        div#box>div{
+            background-color: lightslategray;
+            border-radius: 5px;
+            left: 15px;
+        }
+    </style>
 </head>
 <body>
-    
+    <header>
+        <nav>
+            <div>
+                <img src="https://students.masaischool.com/static/media/masai-logo.e5c8801d4f26d2da036ec9e4b93cb202.svg" alt="logo">
+                <button>Courses</button>
+            </div>
+            <div>
+                <a href="">INTERVIEW GUIDES</a>
+                <a href="">SUCCESS STORIES</a>
+                <a href="">HIRE FROM US</a>
+                <a href="">FEES</a>
+                <button>REGISTER</button>
+            </div>
+        </nav>
+    </header>
+    <section id="winning_formula">
+        <h1>Our <span>winning formula</span></h1>
+        <div class="cards">
+            <div>
+                <h3>Pay After Placement</h3>
+                <p>Start learning today and pay after you start earning</p>
+            </div>
+            <div>
+                <h3>Hands on Learning</h3>
+                <p>Learn by doing practical projects and</p>
+            </div>
+            <div>
+                <h3>Simulated Learning</h3>
+                <p>Ensuring </p>
+            </div>
+        </div>
+    </section>
+    <div id="box">
+        <div>
+            <img src="https://cdn.masaischool.com/masai-website/Vijay_Shekhar_Sharma_Paytm_96f52579b8.jpg" alt="founder image">
+            <h3>Vijay Shekhar Sharma</h3>
+            <p>Founder & CEO</p>
+            <img src="https://cdn.masaischool.com/masai-website/paytm_rect_06df45a24f.svg" alt="paytmlogo">
+        </div>
+        <div>
+            <img src="https://cdn.masaischool.com/masai-website/Vijay_Shekhar_Sharma_Paytm_96f52579b8.jpg" alt="founder image">
+            <h3>Vijay Shekhar Sharma</h3>
+            <p>Founder & CEO</p>
+            <img src="https://cdn.masaischool.com/masai-website/paytm_rect_06df45a24f.svg" alt="paytmlogo">
+        </div>
+        <div>
+            <img src="https://cdn.masaischool.com/masai-website/Vijay_Shekhar_Sharma_Paytm_96f52579b8.jpg" alt="founder image">
+            <h3>Vijay Shekhar Sharma</h3>
+            <p>Founder & CEO</p>
+            <img src="https://cdn.masaischool.com/masai-website/paytm_rect_06df45a24f.svg" alt="paytmlogo">
+        </div>
+        
+    </div>
 </body>
 </html>
 
