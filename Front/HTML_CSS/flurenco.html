@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furlenco</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: rgb(235, 235, 235);
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(245, 245, 245);
+            padding: 12px 24px;
+            flex-wrap: wrap;
+        }
+
+        .material-symbols-outlined{
+            font-size: 24px;
+            color: grey;
+        }
+        .nav-left img{
+            height: 22px;
+        }
+        .nav-links{
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .nav-links a{
+            display: flex;
+            align-items: center;
+            color: grey;
+            text-decoration: none;
+            margin: 0 16px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+        .nav-links a:hover{
+            background-color: lightgray;
+        }
+        .nav-right{
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .search-wrapper{
+            position: relative;
+        }
+        .search-wrapper input{
+            padding: 6px 40px 6px 20px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        .search-wrapper .material-symbols-outlined{
+            position: absolute;
+            right: 8px;
+            top: 5px;
+            font-size: 20px;
+        }
+        .icon-button{
+            cursor: pointer;
+        }
+        div#box{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        div#box>div{
+            flex: 0 0 150px;
+            min-width: 150px;
+            text-align: center;
+            padding: 8px;
+            justify-content: center;
+
+        }
+        div#box>div img{
+            width: 100%;
+        }
+        div#box>div>h2{
+            font-weight: 300;
+            font-size: 12px;
+        }
+        section#one>div>h1{
+            margin: 15px auto;
+            text-align: center;
+            letter-spacing: 5px;
+            font-weight: bolder;
+        }
+        .card-container{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .card{
+            width: 200px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 8px gray;
+
+        }
+        .card img{
+            width: 100%;
+            display: block;
+        }
+        .card p{
+            padding: 10px;
+            font-weight: 200;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <img id="logo" src="https://assets.furlenco.com/image/upload/dpr_1.0,f_auto,q_auto/v1/s3-furlenco-images/yoda/furlenco-logo.png" alt="Flurenco">
+        </div>
+        <div class="nav-links">
+            <a href="#"><span class="material-symbols-outlined">location_on</span></a>
+            <a href="#"><span class="material-symbols-outlined">check_circle</span>Buy</a>
+            <a href="#"><span class="material-symbols-outlined">check_circle</span>Rent</a>
+            <a href="#">UNLMTD</a>
+        </div>
+
+        <div class="nav-right">
+            <div class="search-wrapper">
+                <input type="text" placeholder="What are you searching for?">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+            <span class="material-symbols-outlined icon-button">account_circle</span>
+            <span class="material-symbols-outlined icon-button">heart_plus</span>
+            <span class="material-symbols-outlined icon-button">shopping_cart</span>
+        </div>
+    </nav>
+
+    <section id="one">
+        <div>
+            <h1>RENT FURNITURE</h1>
+        </div>
+        <div id="box">
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div><div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div><div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div><div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+            <div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div><div>
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*e0UlsRVfTM2xw_uVWTsPVg.png" alt="img">
+                <h2>Highway</h2>
+            </div>
+        </div>
+    </section>
+
+    <section id="two">
+        <div class="card-container">
+            <div class="card">
+                <img src="https://caburntelecom.com/wp-content/uploads/2024/01/Caburn-Smart-Agri-tech-scaled-1.jpeg" alt="img 2">
+                <p>Label</p>
+            </div>
+            <div class="card">
+                <img src="https://caburntelecom.com/wp-content/uploads/2024/01/Caburn-Smart-Agri-tech-scaled-1.jpeg" alt="img 2">
+                <p>Label</p>
+            </div>
+            <div class="card">
+                <img src="https://caburntelecom.com/wp-content/uploads/2024/01/Caburn-Smart-Agri-tech-scaled-1.jpeg" alt="img 2">
+                <p>Label</p>
+            </div>
+            <div class="card">
+                <img src="https://caburntelecom.com/wp-content/uploads/2024/01/Caburn-Smart-Agri-tech-scaled-1.jpeg" alt="img 2">
+                <p>Label</p>
+            </div>
+        </div>
+    </section>
+    <footer id="contact">
+        <h2>Contact Me</h2>
+        <form action=""></form>
+    </footer>
+</body>
+</html>
