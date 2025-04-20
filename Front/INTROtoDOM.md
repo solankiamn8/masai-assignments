@@ -1,0 +1,5 @@
+1. document.getElementsById('')
+2. document.getElementsByClassName('')
+3. document.getElementsByTagName('')
+4. document.querySelector('')
+5. document.querySelectorAll('')

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paragraph Manipulation</title>
+</head>
+<body>
+
+  <button id="addParagraphBtn">Add Paragraph</button>
+  <button id="removeParagraphBtn">Remove Last Paragraph</button>
+  
+  <div id="container"></div>
+
+  <script>
+    let addParagraphBtn = document.getElementById('addParagraphBtn');
+    let removeParagraphBtn = document.getElementById('removeParagraphBtn');
+    let container = document.getElementById('container');
+
+    addParagraphBtn.addEventListener('click', () => {
+      let newParagraph = document.createElement('p');
+      newParagraph.textContent = "This is a new paragraph.";
+      container.appendChild(newParagraph);
+    });
+
+    removeParagraphBtn.addEventListener('click', () => {
+      let lastParagraph = container.lastElementChild;
+      if (lastParagraph) {
+        container.removeChild(lastParagraph);
+      }
+    });
+  </script>
+
+</body>
+</html>

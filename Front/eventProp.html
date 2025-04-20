@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Propagation</title>
+</head>
+<body>
+
+  <div id="div1">
+    <button id="btn1">Button 1</button>
+    <div id="div2">
+      <button id="btn2">Button 2</button>
+      <div id="div3">
+        <button id="btn3">Button 3</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let div1 = document.getElementById('div1');
+    let div2 = document.getElementById('div2');
+    let div3 = document.getElementById('div3');
+    let btn1 = document.getElementById('btn1');
+    let btn2 = document.getElementById('btn2');
+    let btn3 = document.getElementById('btn3');
+
+    div1.addEventListener('click', () => {
+      alert('Div 1 clicked');
+    }, false);
+
+    div2.addEventListener('click', () => {
+      alert('Div 2 clicked');
+    }, false);
+
+    div3.addEventListener('click', () => {
+      alert('Div 3 clicked');
+    }, false);
+
+    btn1.addEventListener('click', () => {
+      alert('Button 1 clicked');
+    }, false);
+
+    btn2.addEventListener('click', () => {
+      alert('Button 2 clicked');
+    }, false);
+
+    btn3.addEventListener('click', (event) => {
+      alert('Button 3 clicked');
+      event.stopPropagation();
+    }, false);
+  </script>
+
+</body>
+</html>
