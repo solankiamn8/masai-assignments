@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DOM Example</title>
+</head>
+<body>
+  <h1 id="mainHeading">Hello World!</h1>
+  <p>This is a paragraph.</p>
+  <p>This is another paragraph.</p>
+  <div class="container">
+    <p>Paragraph inside the container.</p>
+  </div>
+
+  <script>
+    let mainHeading = document.getElementById('mainHeading');
+    mainHeading.textContent = "Welcome to the DOM World!";
+
+    let paragraphs = document.getElementsByTagName('p');
+    for (let i = 0; i < paragraphs.length; i++) {
+      paragraphs[i].style.color = 'blue';
+    }
+
+    let containerDiv = document.querySelector('.container');
+    containerDiv.style.backgroundColor = 'yellow';
+  </script>
+</body>
+</html>

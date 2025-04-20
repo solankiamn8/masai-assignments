@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Simple Webpage</title>
+</head>
+<body>
+  <ul id="itemList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+  <button id="addItem">Add Item</button>
+
+  <script>
+    let itemList = document.querySelector('#itemList');
+    let addItemButton = document.getElementById('addItem');
+
+    addItemButton.addEventListener('click', () => {
+      let newItem = document.createElement('li');
+      newItem.textContent = 'New Item';
+      let itemCount = itemList.children.length + 1;
+
+      if (itemCount % 2 !== 0) {
+        newItem.style.fontWeight = 'bold';
+        newItem.style.color = 'blue';
+      } else {
+        newItem.style.fontStyle = 'italic';
+        newItem.style.color = 'red';
+      }
+
+      itemList.appendChild(newItem);
+    });
+  </script>
+</body>
+</html>

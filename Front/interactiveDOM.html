@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Interactive Webpage</title>
+</head>
+<body>
+  <input type="text" id="colorInput" placeholder="Enter color name">
+  <input type="text" id="textInput" placeholder="Enter new text">
+  <button id="changeBackground">Change Background</button>
+  <button id="updateText">Update Text</button>
+  <div id="textContainer">Initial text content</div>
+
+  <script>
+    let colorInput = document.getElementById('colorInput');
+    let textInput = document.getElementById('textInput');
+    let changeBackgroundButton = document.getElementById('changeBackground');
+    let updateTextButton = document.getElementById('updateText');
+    let textContainer = document.getElementById('textContainer');
+
+    changeBackgroundButton.addEventListener('click', () => {
+      let color = colorInput.value.trim();
+      if (color && /^[a-zA-Z]+$/.test(color)) {
+        textContainer.style.backgroundColor = color;
+      } else {
+        alert('Invalid color name!');
+      }
+    });
+
+    updateTextButton.addEventListener('click', () => {
+      let newText = textInput.value.trim();
+      if (newText) {
+        textContainer.textContent = newText;
+      } else {
+        alert('Please enter some text!');
+      }
+    });
+  </script>
+</body>
+</html>
