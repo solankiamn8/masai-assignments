@@ -27,23 +27,23 @@
   </div>
 
   <script>
-    const loginButton = document.getElementById('loginButton')
-    const usernameInput = document.getElementById('username')
-    const cartContainer = document.getElementById('cartContainer')
-    const cartItems = document.getElementById('cartItems')
-    const addItemButton = document.getElementById('addItemButton')
-    const itemNameInput = document.getElementById('itemName')
-    const itemPriceInput = document.getElementById('itemPrice')
-    const itemQuantityInput = document.getElementById('itemQuantity')
-    const totalCost = document.getElementById('totalCost')
-    const saveCartButton = document.getElementById('saveCartButton')
-    const logoutButton = document.getElementById('logoutButton')
+    let loginButton = document.getElementById('loginButton')
+    let usernameInput = document.getElementById('username')
+    let cartContainer = document.getElementById('cartContainer')
+    let cartItems = document.getElementById('cartItems')
+    let addItemButton = document.getElementById('addItemButton')
+    let itemNameInput = document.getElementById('itemName')
+    let itemPriceInput = document.getElementById('itemPrice')
+    let itemQuantityInput = document.getElementById('itemQuantity')
+    let totalCost = document.getElementById('totalCost')
+    let saveCartButton = document.getElementById('saveCartButton')
+    let logoutButton = document.getElementById('logoutButton')
 
     let currentUser = null
     let currentCart = []
 
     loginButton.addEventListener('click', () => {
-      const username = usernameInput.value.trim()
+      let username = usernameInput.value.trim()
       if (username && !localStorage.getItem(username)) {
         alert('Username already taken')
       } else {
@@ -54,17 +54,17 @@
     })
 
     addItemButton.addEventListener('click', () => {
-      const itemName = itemNameInput.value.trim()
-      const itemPrice = parseFloat(itemPriceInput.value)
-      const itemQuantity = parseInt(itemQuantityInput.value)
+      let itemName = itemNameInput.value.trim()
+      let itemPrice = parseFloat(itemPriceInput.value)
+      let itemQuantity = parseInt(itemQuantityInput.value)
 
       if (!itemName || isNaN(itemPrice) || isNaN(itemQuantity) || itemQuantity <= 0) {
         alert('Please provide valid item details')
         return
       }
 
-      const itemTotalCost = itemPrice * itemQuantity
-      const existingItemIndex = currentCart.findIndex(item => item.itemName === itemName)
+      let itemTotalCost = itemPrice * itemQuantity
+      let existingItemIndex = currentCart.findIndex(item => item.itemName === itemName)
       if (existingItemIndex !== -1) {
         currentCart[existingItemIndex].quantity += itemQuantity
         currentCart[existingItemIndex].totalCost += itemTotalCost
@@ -92,7 +92,7 @@
     })
 
     function loadCart() {
-      const savedCart = localStorage.getItem(currentUser)
+      let savedCart = localStorage.getItem(currentUser)
       if (savedCart) {
         currentCart = JSON.parse(savedCart)
       } else {
@@ -105,7 +105,7 @@
       cartItems.innerHTML = ''
       let totalCostValue = 0
       currentCart.forEach((item, index) => {
-        const li = document.createElement('li')
+        let li = document.createElement('li')
         li.innerHTML = `${item.itemName} - $${item.price} x ${item.quantity} = $${item.totalCost} <button onclick="removeItem(${index})">Remove</button>`
         cartItems.appendChild(li)
         totalCostValue += item.totalCost
