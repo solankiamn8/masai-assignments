@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, lightgray, lightblue);
+            color: black;
+        }
+        header{
+            background: linear-gradient(to right, black, darkslategray, dimgray);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .logo img{
+            width: 100%;
+            height: 100%;
+            transform: scale(1.2);
+            object-fit: cover;
+            object-position: center;
+        }
+        nav{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        nav a{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover, nav a:active{
+            color: gold;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://img.freepik.com/free-photo/digital-art-beautiful-mountains_23-2151123580.jpg?semt=ais_hybrid&w=740" alt="header-logo">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="destinations.html">DESTINATIONS</a>
+            <a href="gallery.html">GALLERY</a>
+            <a href="contact.html">CONTACT US</a>
+        </nav>
+    </header>
+</body>
+</html>

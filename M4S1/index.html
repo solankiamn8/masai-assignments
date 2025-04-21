@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomadic Traveler</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, lightgray, lightblue);
+            color: black;
+        }
+        header{
+            background: linear-gradient(to right, black, darkslategray, dimgray);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .logo img{
+            width: 100%;
+            height: 100%;
+            transform: scale(1.2);
+            object-fit: cover;
+            object-position: center;
+        }
+        nav{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        nav a{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover, nav a:active{
+            color: gold;
+            font-weight: bold;
+        }
+        .main{
+            text-align: center;
+        }
+        .hero{
+            background: url('https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?cs=srgb&dl=pexels-jaime-reimer-1376930-2662116.jpg&fm=jpg') no-repeat center/cover;
+            min-height: 60vh;
+            color:white;
+            padding: 6rem 12rem;
+            position: relative;
+        }
+        .hero-content{
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: auto;
+        }
+        .hero h1{
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .brief{
+            padding: 2rem;
+            background: linear-gradient(to right, white, aliceblue);
+        }
+        .embedded-map{
+            padding: 2rem;
+        }
+        iframe{
+            width: 90%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .top-destinations{
+            padding: 2rem;
+            background: linear-gradient(to right, white, lavender);
+        }
+        .top-destinations h2{
+            margin: 1rem;
+            color: darkslategray;
+        }
+        .table-container{
+            overflow-x: auto;
+        }
+        table{
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td{
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid lightgray;
+        }
+        th{
+            background-color: whitesmoke;
+            color: black;
+        }
+        tr:hover{
+            background-color: lightyellow;
+        }
+        sup{
+            font-size: 0.75rem;
+            vertical-align: super;
+        }
+        footer{
+            background: linear-gradient(to right, dimgray, darkslategray, black);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        .social-links{
+            margin: 0 0.5rem;
+            display: inline-block;
+        }
+        .social-links img{
+            width: 30px;
+            height: 30px;
+        }
+        .social-links img:hover{
+            transform: scale(1.1);
+        }
+        @media (max-width: 600px){
+            header{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            .logo img{
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://img.freepik.com/free-photo/digital-art-beautiful-mountains_23-2151123580.jpg?semt=ais_hybrid&w=740" alt="header-logo">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="destinations.html">DESTINATIONS</a>
+            <a href="gallery.html">GALLERY</a>
+            <a href="contact.html">CONTACT US</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Explore the World with Us!</h1>
+                <p>Discover hidden gems, breathtaking views, and unforgettable adventures.</p>
+            </div>
+        </section>
+
+        <section class="brief">
+            <h2>About Our Blog</h2>
+            <p>Our primary purpose is to share travel experiences, provide information about destinations, and inspire readers to explore the world.</p>
+        </section>
+
+        <section class="embedded-map">
+            <h2>Popular Travel Spots</h2>
+            <iframe src="https://www.google.com/maps/d/embed?mid=11nHT0vuoqW255s9v1_UonbhhWxqFUTU&ehbc=2E312F" allowfullscreen></iframe>
+        </section>
+
+        <section class="top-destinations">
+            <h2>Top Travel Destinations</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Destinations</th>
+                            <th>Popular Activities</th>
+                            <th>Estimated Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Paris, France</td>
+                            <td>Eiffel Tower, Museum Tours</td>
+                            <td><sup>USD</sup>1200</td>
+                        </tr>
+                        <tr>
+                            <td>Bali, Indonesia</td>
+                            <td>Surfing, Temples, Beaches</td>
+                            <td><sup>IDR</sup>3,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Tokyo, Japan</td>
+                            <td>Food Tour, Anime Spots</td>
+                            <td><sup>JPY</sup>270,000</td>
+                        </tr>
+                        <tr>
+                            <td>Cape Town, South Africa</td>
+                            <td>Safari, Table Mountain</td>
+                            <td><sup>ZAR</sup>10,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact Us at: nomadictraveler@example.com</p>
+        <div class="social-links">
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="">
+            </a>
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="">
+            </a>
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png" alt="">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
