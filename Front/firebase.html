@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List from Firebase</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 50px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">User List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="user-table-body">
+            <!-- User data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        const databaseUrl = 'https://products-1028e-default-rtdb.asia-southeast1.firebasedatabase.app/users/data.json';
+
+        function fetchUsers() {
+            fetch(databaseUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const userTableBody = document.getElementById('user-table-body');
+                    userTableBody.innerHTML = ''; // Clear existing data
+
+                    if (data) {
+                        for (const userId in data) {
+                            const user = data[userId];
+                            const row = document.createElement('tr');
+                            row.innerHTML = `<td>${user.name}</td><td>${user.email}</td>`;
+                            userTableBody.appendChild(row);
+                        }
+                    } else {
+                        userTableBody.innerHTML = '<tr><td colspan="2">No users found.</td></tr>';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('user-table-body').innerHTML = '<tr><td colspan="2">Failed to load user data. Please try again later.</td></tr>';
+                });
+        }
+
+        // Call the function to fetch users when the page loads
+        window.onload = fetchUsers;
+    </script>
+</body>
+</html>
