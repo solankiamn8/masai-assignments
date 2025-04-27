@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    .task-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      background: #fff;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+    }
+    #editModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .close-btn {
+      cursor: pointer;
+      padding: 5px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Task Manager</h2>
+
+  <div class="task-container">
+    <ul id="taskList">
+    </ul>
+  </div>
+
+  <div id="editModal">
+    <div class="modal-content">
+      <h3>Edit Task</h3>
+      <input type="text" id="editTitle" placeholder="Task Title" required />
+      <select id="editStatus">
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <button id="saveEditBtn">Save Changes</button>
+      <button id="closeModal" class="close-btn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const apiUrl = 'https://680e5f6267c5abddd191edd1.mockapi.io/tasks';
+    let currentEditingTaskId = null;
+
+    async function fetchTasks() {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Failed to fetch tasks');
+        const tasks = await response.json();
+        displayTasks(tasks);
+      } catch (error) {
+        alert('Error fetching tasks');
+      }
+    }
+
+    function displayTasks(tasks) {
+      const taskList = document.getElementById('taskList');
+      taskList.innerHTML = '';
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${task.title} - ${task.status}</span>
+          <div>
+            <button class="edit-btn" onclick="openEditModal(${task.id}, '${task.title}', '${task.status}')">Edit</button>
+            <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+          </div>
+        `;
+        taskList.appendChild(li);
+      });
+    }
+
+    function openEditModal(id, title, status) {
+      currentEditingTaskId = id;
+      document.getElementById('editTitle').value = title;
+      document.getElementById('editStatus').value = status;
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('editModal').style.display = 'none';
+    });
+
+    document.getElementById('saveEditBtn').addEventListener('click', async () => {
+      const title = document.getElementById('editTitle').value;
+      const status = document.getElementById('editStatus').value;
+      if (!title || !status) {
+        alert('Please fill in both fields');
+        return;
+      }
+
+      const updatedTask = { title, status };
+
+      try {
+        const response = await fetch(`${apiUrl}/${currentEditingTaskId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedTask)
+        });
+
+        if (!response.ok) throw new Error('Failed to update task');
+        fetchTasks();
+        document.getElementById('editModal').style.display = 'none';
+      } catch (error) {
+        alert('Error updating task');
+      }
+    });
+
+    async function deleteTask(id) {
+      const confirmation = confirm('Are you sure you want to delete this task?');
+      if (!confirmation) return;
+
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (!response.ok) throw new Error('Failed to delete task');
+        fetchTasks();
+      } catch (error) {
+        alert('Error deleting task');
+      }
+    }
+
+    fetchTasks();
+  </script>
+
+</body>
+</html>

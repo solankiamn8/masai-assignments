@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .loading, .error {
+            margin-top: 20px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="filters">
+    <select id="category">
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+    </select>
+
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
+    <button onclick="fetchProducts()">Search</button>
+</div>
+
+<div id="status"></div>
+<div id="productList" class="product-grid"></div>
+
+<script>
+async function fetchProducts() {
+    const category = document.getElementById('category').value;
+    const minPrice = document.getElementById('minPrice').value;
+    const maxPrice = document.getElementById('maxPrice').value;
+    const productList = document.getElementById('productList');
+    const status = document.getElementById('status');
+
+    // Clear previous data
+    productList.innerHTML = '';
+    status.textContent = 'Loading...';
+    status.style.color = 'black';
+
+    // Build the API URL
+    const baseURL = 'https://mockapi.io/products';
+    const params = new URLSearchParams({
+        category: category,
+        min_price: minPrice,
+        max_price: maxPrice,
+        sort: 'asc'
+    });
+
+    try {
+        const response = await fetch(`${baseURL}?${params.toString()}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch products');
+        }
+
+        const products = await response.json();
+
+        // If no products
+        if (products.length === 0) {
+            status.textContent = 'No products found.';
+            status.style.color = 'orange';
+            return;
+        }
+
+        // Show products
+        status.textContent = '';
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" width="100" height="100">
+                <h4>${product.name}</h4>
+                <p>Price: $${product.price}</p>
+            `;
+            productList.appendChild(card);
+        });
+    } catch (error) {
+        status.textContent = 'Error loading products.';
+        status.style.color = 'red';
+        console.error(error);
+    }
+}
+</script>
+
+</body>
+</html>
