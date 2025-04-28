@@ -116,6 +116,11 @@
                 console.error('Error saving note:', error)
             }
         })
+        toggleBtn.addEventListener('click', ()=> {
+            let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+            document.documentElement.setAttribute('data-theme', theme)
+            localStorage.setItem('theme', theme)
+        })
     </script>
 </body>
 </html>
