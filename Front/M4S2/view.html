@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .note-grid{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .note {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1 1 300px;
+            position: relative;
+        }
+        .note img{
+            max-width: 100%;
+            height: auto;
+        }
+        .note-buttons{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .note-buttons button{
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Study Notes</div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="create.html">Create Notes</a>
+            <a href="view.html">View Notes</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>      
+
+    <main>
+        <h2>Your Study Notes</h2>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search by title...">
+            
+            <select id="filterPriority">
+                <option value="">Filter by Priority</option>
+                <option value="high">High</option>
+                <option value="mid">Mid</option>
+                <option value="low">Low</option>
+            </select>
+
+            <select id="filterTag">
+                <option value="">Filter by Tag</option>
+                <option value="Math">Math</option>
+                <option value="Science">Science</option>
+                <option value="History">History</option>
+            </select>
+
+            <select id="sortOption">
+                <option value="">Sort by</option>
+                <option value="date-asc">Date (Newest)</option>
+                <option value="date-desc">Date (Oldest)</option>
+                <option value="priority">Priority (High → Low)</option>
+            </select>
+        </div>
+
+        <div id="notesContainer" class="note-grid"></div>
+    </main>
+
+    <footer>
+        <p>Contact: studynotes@example.com</p>
+        <div class="socials">
+            <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Instagram</a>
+        </div>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </footer>
+
+    <script>
+        window.onload = fetchNotes
+        let firebaseUrl = "https://products-1028e-default-rtdb.asia-southeast1.firebasedatabase.app/users/notes"
+
+        let allNotes = {}
+        let localBackup = []
+
+        async function fetchNotes() {
+            try {
+                let res = await fetch(firebaseUrl + '.json')
+                console.log('res')
+                let data = await res.json()
+                if(data){
+                    allNotes = data
+                    localStorage.setItem('notes', JSON.stringify(data))
+                    renderNotes()
+                } else {
+                    loadLocalNotes()
+                }
+            } catch (error) {
+                console.log("Offline. Loading from local storage...")
+                loadLocalNotes()
+            }
+        } 
+
+        function loadLocalNotes() {
+            let stored = localStorage.getItem('notes')
+            if(stored) {
+                allNotes = JSON.parse(stored)
+                renderNotes()
+            }
+        }
+
+        function renderNotes() {
+            let container = document.getElementById('notesContainer')
+            container.innerHTML = ''
+            
+            let notesArray = Object.entries(allNotes).map(([id, note]) => ({id, ...note }))
+            
+            let search = document.getElementById('search').value.toLowerCase()
+            let priorityFilter = document.getElementById('filterPriority').value
+            let tagFilter = document.getElementById('filterTag').value
+            let sortOption = document.getElementById('sortOption').value
+
+            if(search) {
+                notesArray = notesArray.filter(n => n.title.toLowerCase().includes(search))
+            }
+            if(priorityFilter) {
+                notesArray = notesArray.filter(n => n.priority === priorityFilter)
+            }
+            if(tagFilter) {
+                notesArray = notesArray.filter(n => tags.includes(tagFilter))
+            }
+            if(sortOption == 'date-asc'){
+                notesArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            } else if(sortOption == 'date-desc'){
+                notesArray.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            } else if(sortOption == 'priority'){
+                let priorityOrder = { 'high': 1 , 'mid': 2 , 'low': 3 }
+                notesArray.sort((a,b) => priorityOrder[a.priority] - priorityOrder[b.priority])
+            }
+
+            notesArray.forEach(note => {
+                let div = document.createElement('div')
+                div.className = 'note'
+                div.innerHTML = `
+                    <h3>${note.title}</h3>
+                    <p>${note.content}</p>
+                    <p><strong>Priority:</strong>${note.priority}</p>
+                    <p><strong>Tags:</strong>${note.tags.join(", ")}</p>
+                    ${note.imageUrl ? `<img src="${note.imageUrl}" alt="Diagram">` : " " }
+                    <div class="note-buttons">
+                        <button onclick="editNote('${note.id}')">Edit</button>
+                        <button onclick="deleteNote('${note.id}')">Delete</button>
+                    </div>`
+                container.appendChild(div)
+            })
+        }       
+
+        async function deleteNote(id) {
+            if(confirm("Are you sure you want to delete this note?")) {
+                try {
+                    await fetch(firebaseUrl + '/' + id + '.json', {method: 'DELETE'})
+                    delete allNotes[id]
+                    localStorage.setItem('notes', JSON.stringify(allNotes))
+                    renderNotes()
+                    alert('Note deleted')
+                } catch (error) {
+                    console.error('Error deleting:', error)
+                }
+            }
+        }
+
+        function editNote(id) {
+            let note = allNotes[id]
+            let newTitle = prompt("Edit Title:", note.title)
+            let newContent = prompt("Edit Content:", note.content)
+            if(newTitle != null && newContent != null) {
+                let updatedNote = {
+                    ...note,
+                    title: newTitle,
+                    content: newContent
+                }
+                fetch(firebaseUrl + '/' + id + '.json', {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'appication/json' },
+                    body: JSON.stringify(updatedNote)
+                }).then(()=> {
+                    allNotes[id] = updatedNote
+                    localStorage.setItem('notes', JSON.stringify(allNotes))
+                    renderNotes()
+                    alert("Notes updated!")
+                }).catch(error=> {
+                    console.error("Error updating:", error)
+                })
+            }
+        }
+        
+        document.getElementById('search').addEventListener('input', renderNotes)
+        document.getElementById('filterPriority').addEventListener('change', renderNotes)
+        document.getElementById('filterTag').addEventListener('change', renderNotes)
+        document.getElementById('sortOption').addEventListener('change', renderNotes)
+
+        let toggleBtn = document.getElementById('darkModeToggle')
+        toggleBtn.addEventListener('click', ()=> {
+            let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+            document.documentElement.setAttribute('data-theme', theme)
+            localStorage.setItem('theme', theme)
+        })
+        let savedTheme = localStorage.getItem('theme') || 'light'
+        document.documentElement.setAttribute('data-theme', savedTheme)
+    </script>
+
+</body>
+</html>

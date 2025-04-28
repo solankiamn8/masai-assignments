@@ -1,0 +1,78 @@
+:root {
+    --background-light: #ffffff;
+    --background-dark: #121212;
+    --text-light: #000000;
+    --text-dark: #ffffff;
+}
+
+[data-theme="dark"] {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+[data-theme="light"] {
+    background-color: var(--background-light);
+    color: var(--text-light);
+}
+
+body{
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+main {
+    flex: 1;
+    padding: 2 rem;
+}
+
+nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* .notes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.notes-card {
+    background: lightgrey;
+    padding: 1rem;
+    border-radius: 8px;
+    flex: 1 1 300px;
+} */
+
+footer .socials a{
+    color: white;
+    margin: 0 5px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* @media (max-width: 768px) {
+    .notes-grid {
+        flex-direction: column;
+    }
+} */

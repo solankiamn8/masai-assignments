@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        form {
+            max-width: 600px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea, select {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        .tags{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .tags label{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Study Notes</div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="create.html">Create Notes</a>
+            <a href="view.html">View Notes</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+    </header>     
+
+    <main class="main">
+        <h2>Create New Study Note</h2>
+        <form id="noteForm">
+            <input type="text" id="title" placeholder="Title" required>
+            <textarea id="content" placeholder="Content" rows="5" required></textarea>
+
+            <div class="tags">
+                <label><input type="checkbox" value="Math">Math</label>
+                <label><input type="checkbox" value="Science">Science</label>
+                <label><input type="checkbox" value="History">History</label>
+            </div>
+
+            <select id="priority" required>
+                <option value="">Select Priority</option>
+                <option value="high">High</option>
+                <option value="mid">Mid</option>
+                <option value="low">Low</option>
+            </select>
+
+            <input type="file" id="imageUpload">
+
+            <button type="submit">Save Note</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Contact: studynotes@example.com</p>
+        <div class="socials">
+            <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Instagram</a>
+        </div>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </footer>
+
+    <script>
+        let form = document.getElementById('noteForm')
+        let toggleBtn = document.getElementById('darkModeToggle')
+        let firebaseUrl = "https://products-1028e-default-rtdb.asia-southeast1.firebasedatabase.app/users/notes.json"
+
+        form.addEventListener('submit', async(e) => {
+            e.preventDefault()
+
+            let title = document.getElementById('title').value.trim()
+            let content = document.getElementById('content').value.trim()
+            let priority = document.getElementById('priority').value
+            let tags = Array.from(document.querySelectorAll('.tags input:checked')).map(tag => tag.value)
+
+            let imageUrl = ""
+            let imageUploadInput = document.getElementById('imageUpload')
+            if(imageUploadInput && imageUploadInput.files.length>0) {
+                let imageFile = imageUploadInput.files[0]
+                imageUrl = URL.createObjectURL(imageFile)
+            }
+
+            let note = {
+                title,
+                content,
+                priority,
+                tags,
+                imageUrl,
+                createdAt: new Date().toISOString()
+            }
+
+            try{
+                await fetch(firebaseUrl, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(note)
+                })
+
+                let localNotes = JSON.parse(localStorage.getItem('notes')) || []
+                localNotes.push(note)
+                localStorage.setItem('notes', JSON.stringify(localNotes))
+
+                form.reset()
+                alert('Your note has been successfully saved')
+            } catch (error){
+                console.error('Error saving note:', error)
+            }
+        })
+    </script>
+</body>
+</html>
