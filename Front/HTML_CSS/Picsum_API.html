@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Throttled Image Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #slider {
+      margin: 20px 0;
+    }
+    img {
+      width: 600px;
+      height: 400px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #slideNumber {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Image Slider</h2>
+  <div id="slider">
+    <img id="image" src="https://picsum.photos/600/400?random=0" alt="Random" />
+  </div>
+  <button id="prev">Previous</button>
+  <button id="next">Next</button>
+
+  <div id="slideNumber">Slide #1</div>
+
+  <script>
+    let currentSlide = 1;
+    let isThrottled = false;
+    let clickCount = 0;
+
+    const image = document.getElementById('image');
+    const slideNumber = document.getElementById('slideNumber');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+
+    function updateImage(direction) {
+      if (isThrottled) {
+        clickCount++;
+        if (clickCount > 3) {
+          alert("Chill chill, loading it!!");
+        }
+        return;
+      }
+
+      isThrottled = true;
+      clickCount = 1;
+
+      if (direction === 'next') {
+        currentSlide++;
+      } else if (direction === 'prev' && currentSlide > 1) {
+        currentSlide--;
+      }
+
+      image.src = `https://picsum.photos/600/400?random=${Date.now()}`;
+      slideNumber.textContent = `Slide #${currentSlide}`;
+
+      setTimeout(() => {
+        isThrottled = false;
+        clickCount = 0;
+      }, 1000);
+    }
+
+    nextBtn.addEventListener('click', () => updateImage('next'));
+    prevBtn.addEventListener('click', () => updateImage('prev'));
+  </script>
+
+</body>
+</html>

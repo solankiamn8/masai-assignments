@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debounced Movie Search</title>
+  <style>
+    #results {
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+    }
+    .movie {
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Movie Search</h2>
+  <input type="text" id="search" placeholder="Type a movie name..." />
+  <div id="results"></div>
+
+  <script>
+    const apiKey = 'ad9997da'; // Replace with your actual API key if needed
+    const input = document.getElementById('search');
+    const resultsDiv = document.getElementById('results');
+
+    let debounceTimeout;
+
+    input.addEventListener('input', function () {
+      clearTimeout(debounceTimeout);
+
+      debounceTimeout = setTimeout(() => {
+        const query = input.value.trim();
+        if (query.length === 0) {
+          resultsDiv.innerHTML = '';
+          return;
+        }
+
+        fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.Response === "True") {
+              resultsDiv.innerHTML = data.Search.map(movie => `<div class="movie">${movie.Title}</div>`).join('');
+            } else {
+              resultsDiv.innerHTML = `<div>No results found</div>`;
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            resultsDiv.innerHTML = `<div>Error fetching data</div>`;
+          });
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
