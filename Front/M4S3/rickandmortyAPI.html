@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty Dashboard</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        h1{
+            text-align: center;
+            color: #2a3847;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .filters {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .pagination{
+            margin: 20px 0;
+            text-align: center;
+        }
+        #searchInput, #speciesFilter{
+            padding: 8px;
+            width: 300px;
+            margin: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        #speciesFilter option{
+            font-size: 1rem;
+        }
+        .character-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, min-max(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+        }
+        .character-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+        }
+        .character-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rick and Morty Character Dashboard</h1>
+
+    <input type="text" id="searchInput" placeholder="Search by name...">
+
+    <div class="filters">
+        <select id="speciesFilter" multiple>
+            <option value="Human">Human</option>
+            <option value="Alien">Alien</option>
+            <option value="Robot">Robot</option>
+            <option value="Mythological Creature">Mythological Creature</option>
+        </select>
+    </div>
+
+    <div id="charactersContainer" class="character-cards"></div>
+
+    <div class="pagination">
+        <button id="prevBtn" disabled>Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button id="nextBtn">Next</button>
+    </div>
+
+    <script>
+        let apiUrl = "https://rickandmortyapi.com/api/character"
+        let currentPage = 1
+        let totalPages = 1
+        let allCharacters = []
+        let filteredCharacters = []
+
+        let searchInput = document.getElementById('searchInput')
+        let speciesFilter = document.getElementById('speciesFilter')
+        let charactersContainer = document.getElementById('charactersContainer')
+        let pageNumberDisplay = document.getElementById('pageNumber')
+        let prevBtn = document.getElementById('prevBtn')
+        let nextBtn = document.getElementById('nextBtn')
+
+        function debounce(fn, delay){
+            let timeout
+            return function (...args){
+                clearTimeout(timeout)
+                timeout = setTimeout(() => fn(...args), delay)
+            }
+        }
+
+        async function fetchCharacters(page = 1){
+            let res = await fetch(`${apiUrl}?page=${page}`)
+            let data = await res.json()
+            allCharacters = data.results
+            totalPages = data.info.pages
+            applyFilters()
+        }
+
+        function renderCharacters(characters){
+            charactersContainer.innerHTML = ""
+            characters.forEach(character => {
+                let characterCard = document.createElement('div')
+                characterCard.className = "character-card"
+                characterCard.innerHTML = `
+                <img src="${character.image}" alt="${character.name}">
+                <h3>${character.name}</h3>   
+                <p>Status: ${character.status}</p>
+                `
+                charactersContainer.appendChild(characterCard)
+            });
+        }
+
+        let handleSearchInput = debounce(() => {
+            applyFilters()
+        }, 500)
+
+        function applyFilters() {
+            let searchTerm = searchInput.value.toLowerCase()
+            let selectedSpecies = Array.from(speciesFilter.selectedOptions).map(option => option.value)
+
+            filteredCharacters = allCharacters.filter(character => {
+                let matchesSearch = character.name.toLowerCase()
+                let matchesSpecies = selectedSpecies.length === 0 || selectedSpecies.includes(character.species)
+                return matchesSearch && matchesSpecies
+            })
+
+            renderCharacters(filteredCharacters.slice(0, 6))
+            updatePagination()
+        }
+
+        function handlePagination(direction) {
+            if(direction === 'next' && currentPage <totalPages){
+                currentPage++
+            } else if(direction === 'prev' && currentPage > 1){
+                currentPage--
+            }
+            fetchCharacters(currentPage)
+        }
+
+        function updatePagination() {
+            pageNumberDisplay.textContent = `Page ${currentPage}`
+            prevBtn.disabled = currentPage === 1
+            nextBtn.disabled = currentPage === totalPages
+        }
+
+        searchInput.addEventListener("input", handleSearchInput)
+        speciesFilter.addEventListener('change', applyFilters)
+
+        prevBtn.addEventListener('click', () => handlePagination('prev'))
+        nextBtn.addEventListener('click', () => handlePagination('next'))
+
+        fetchCharacters(currentPage)
+
+    </script>
+    
+</body>
+</html>
