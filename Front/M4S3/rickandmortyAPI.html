@@ -120,11 +120,20 @@
             }
         }
 
-        async function fetchCharacters(page = 1){
-            let res = await fetch(`${apiUrl}?page=${page}`)
-            let data = await res.json()
-            allCharacters = data.results
-            totalPages = data.info.pages
+        async function fetchAllCharacters(){
+            let page = 1
+            let results = []
+            let hasMore = true
+
+            while(hasMore){
+                let res = await fetch(`${apiUrl}?page=${page}`)
+                let data = await res.json()
+                results = results.concat(data.results)
+                hasMore = data.info.next !== null
+                page++
+            }
+
+            allCharacters = results
             applyFilters()
         }
 
@@ -156,7 +165,9 @@
                 return matchesSearch && matchesSpecies
             })
 
-            renderCharacters(filteredCharacters.slice(0, 6))
+            totalPages = Math.ceil(filteredCharacters.length/6)
+            currentPage = Math.min(currentPage, totalPages) || 1
+            renderCharacters(filteredCharacters.slice((currentPage-1) * 6, currentPage * 6))
             updatePagination()
         }
 
@@ -166,7 +177,7 @@
             } else if(direction === 'prev' && currentPage > 1){
                 currentPage--
             }
-            fetchCharacters(currentPage)
+            applyFilters()
         }
 
         function updatePagination() {
@@ -181,7 +192,7 @@
         prevBtn.addEventListener('click', () => handlePagination('prev'))
         nextBtn.addEventListener('click', () => handlePagination('next'))
 
-        fetchCharacters(currentPage)
+        fetchAllCharacters()
 
     </script>
     
