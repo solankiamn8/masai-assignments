@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pricing Plans</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #1a1a1a;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0;
+      max-width: 50%;
+    }
+
+    .header h1 span {
+      color: #a78bfa;
+    }
+
+    .header p {
+      color: #555;
+      max-width: 50%;
+      text-align: right;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .plan {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #eee;
+      padding: 30px 0;
+    }
+
+    .plan:last-child {
+      border-bottom: 1px solid #eee;
+    }
+
+    .plan-title {
+      font-weight: 700;
+      font-size: 20px;
+      width: 20%;
+    }
+
+    .plan-features {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      width: 40%;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .feature-icon {
+      color: #10b981;
+      margin-right: 8px;
+    }
+
+    .plan-price {
+      font-size: 28px;
+      font-weight: 700;
+      width: 20%;
+      text-align: right;
+    }
+
+    .btn {
+      background-color: #a78bfa;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn.inactive {
+      background-color: #e5e7eb;
+      color: #7c3aed;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header h1, .header p {
+        max-width: 100%;
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      .plan {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .plan-title, .plan-features, .plan-price {
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>The Right Plan for <span>Your Business</span></h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam quod in iure vero. Facilis magnam, sed officiis commodi labore odit.</p>
+    </div>
+
+    <div class="plan">
+      <div class="plan-title">Starter</div>
+      <div class="plan-features">
+        <div class="feature"><span class="feature-icon">✅</span> 1 lorem ipsum</div>
+        <div class="feature"><span class="feature-icon">✅</span> Lorem, ipsum dolor.</div>
+        <div class="feature"><span class="feature-icon">✅</span> Monthly Updates</div>
+      </div>
+      <div class="plan-price">Free</div>
+      <button class="btn inactive">Get Started</button>
+    </div>
+
+    <div class="plan">
+      <div class="plan-title">Lorem Plus</div>
+      <div class="plan-features">
+        <div class="feature"><span class="feature-icon">✅</span> 1 lorem ipsum</div>
+        <div class="feature"><span class="feature-icon">✅</span> Lorem, ipsum dolor.</div>
+        <div class="feature"><span class="feature-icon">✅</span> Monthly Updates</div>
+      </div>
+      <div class="plan-price">$32.00</div>
+      <button class="btn">Get Started</button>
+    </div>
+
+    <div class="plan">
+      <div class="plan-title">Lorem Pro</div>
+      <div class="plan-features">
+        <div class="feature"><span class="feature-icon">✅</span> 1 lorem ipsum</div>
+        <div class="feature"><span class="feature-icon">✅</span> Lorem, ipsum dolor.</div>
+        <div class="feature"><span class="feature-icon">✅</span> Monthly Updates</div>
+      </div>
+      <div class="plan-price">$50.00</div>
+      <button class="btn inactive">Get Started</button>
+    </div>
+  </div>
+</body>
+</html>

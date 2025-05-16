@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reusable Card Component</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    // Card Component
+    function Card({ title, children }) {
+      return (
+        React.createElement('div', { style: { border: '1px solid #ccc', padding: '20px', margin: '10px', borderRadius: '8px' } },
+          React.createElement('h2', null, title),
+          React.createElement('div', null, children)
+        )
+      );
+    }
+
+    // Parent App Component
+    function App() {
+      return (
+        React.createElement('div', null,
+          React.createElement(Card, { title: "Card 1 Title" },
+            React.createElement('p', null, "This is the content of Card 1. It can include text, images, or other components.")
+          ),
+          React.createElement(Card, { title: "Card 2 Title" },
+            React.createElement('ul', null,
+              React.createElement('li', null, 'Item 1'),
+              React.createElement('li', null, 'Item 2'),
+              React.createElement('li', null, 'Item 3')
+            )
+          ),
+          React.createElement(Card, { title: "Card 3 Title" },
+            React.createElement('p', null, "Card 3 content includes more complex or dynamic elements like " +
+              React.createElement('strong', null, 'bold text') + " or " +
+              React.createElement('em', null, 'italic text') + ".")
+          )
+        )
+      );
+    }
+
+    // Rendering the App Component
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(React.createElement(App));
+  </script>
+</body>
+</html>

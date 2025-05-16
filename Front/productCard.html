@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Card</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone"></script>
+  <style>
+    .product-card {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      width: 200px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .badge {
+      background-color: red;
+      color: white;
+      padding: 5px;
+      border-radius: 3px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .form-container {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 300px;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function ProductCard({ name, price, image, discount }) {
+      return (
+        <div className="product-card">
+          <h3>{name}</h3>
+          <img src={image} alt={name} />
+          <p>${price}</p>
+          {discount && <div className="badge">{discount}% OFF</div>}
+        </div>
+      );
+    }
+
+    function App() {
+      const [products, setProducts] = React.useState([]);
+      const [name, setName] = React.useState("");
+      const [price, setPrice] = React.useState("");
+      const [image, setImage] = React.useState("");
+      const [discount, setDiscount] = React.useState("");
+      const [errors, setErrors] = React.useState({});
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        let formErrors = {};
+
+        if (!name.trim()) {
+          formErrors.name = "Name is required.";
+        }
+        if (!price || price <= 0) {
+          formErrors.price = "Price should be a positive number.";
+        }
+        if (!image.startsWith("http")) {
+          formErrors.image = "Please enter a valid image URL.";
+        }
+        if (discount && (discount < 0 || discount > 100)) {
+          formErrors.discount = "Discount should be between 0 and 100.";
+        }
+
+        if (Object.keys(formErrors).length === 0) {
+          setProducts([
+            ...products,
+            { name, price, image, discount: discount || 0 }
+          ]);
+          setName("");
+          setPrice("");
+          setImage("");
+          setDiscount("");
+        } else {
+          setErrors(formErrors);
+        }
+      };
+
+      return (
+        <div>
+          <h1>Product Catalog</h1>
+
+          <div className="form-container">
+            <h2>Add New Product</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>Name:</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                {errors.name && <div className="error">{errors.name}</div>}
+              </div>
+              <div>
+                <label>Price:</label>
+                <input
+                  type="number"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+                {errors.price && <div className="error">{errors.price}</div>}
+              </div>
+              <div>
+                <label>Image URL:</label>
+                <input
+                  type="text"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+                {errors.image && <div className="error">{errors.image}</div>}
+              </div>
+              <div>
+                <label>Discount (%):</label>
+                <input
+                  type="number"
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
+                />
+                {errors.discount && <div className="error">{errors.discount}</div>}
+              </div>
+              <button type="submit">Add Product</button>
+            </form>
+          </div>
+
+          <div>
+            <h2>Product List</h2>
+            {products.length === 0 ? (
+              <p>No products available.</p>
+            ) : (
+              products.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  discount={product.discount}
+                />
+              ))
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
