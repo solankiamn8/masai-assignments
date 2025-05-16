@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixed Hello World</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+  <div>
+    <h2>Imperative Approach:</h2>
+    <script>
+      const pElement = document.createElement('p');
+      pElement.textContent = 'Hello, World! (Imperative)';
+      document.body.appendChild(pElement);
+    </script>
+  </div>
+
+  <div id="react-root">
+    <h2>Declarative Approach:</h2>
+  </div>
+
+  <script>
+    const element = React.createElement('p', null, 'Hello, World! (Declarative)');
+    const root = ReactDOM.createRoot(document.getElementById('react-root'));
+    root.render(element);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanilla DOM Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Vanilla DOM vs React Virtual DOM</h1>
+
+  <h2>Vanilla JS Title: <span id="vanilla-title">Vanilla JS: Initial</span></h2>
+  <button id="vanilla-btn">Change Title (Vanilla JS)</button>
+  <p>Vanilla JS Updates: <span id="vanilla-update-count">0</span></p>
+
+  <h2>React Title: <span id="react-title">React: Initial</span></h2>
+  <button id="react-btn">Change Title (React)</button>
+  <p>React Updates: <span id="react-update-count">0</span></p>
+
+  <script>
+    let vanillaUpdateCount = 0;
+    let reactUpdateCount = 0;
+
+    document.getElementById('vanilla-btn').addEventListener('click', () => {
+      document.title = "Vanilla JS: " + new Date().toLocaleTimeString();
+      document.getElementById("vanilla-title").textContent = "Vanilla JS: " + new Date().toLocaleTimeString();
+      vanillaUpdateCount++;
+      document.getElementById("vanilla-update-count").textContent = vanillaUpdateCount;
+    });
+
+    document.getElementById('react-btn').addEventListener('click', () => {
+      reactUpdateCount++;
+      document.getElementById("react-title").textContent = "React: " + new Date().toLocaleTimeString();
+      document.getElementById("react-update-count").textContent = reactUpdateCount;
+    });
+  </script>
+
+</body>
+</html>
