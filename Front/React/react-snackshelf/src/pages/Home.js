@@ -3,7 +3,7 @@ import { db, ref, set, onValue, remove, update } from "../services/firebase";
 
 function Home(){
     const [snacks, setSnacks] = useState([])
-    const [form, SetForm] = useState({ title: "", category: 'Sweet', price: '', rating: ''})
+    const [form, setForm] = useState({ title: "", category: 'Sweet', price: '', rating: ''})
     const [editId, setEditId] = useState(null)
     const [search, setSearch] = useState('')
     const [currentPage, setCurrentPage] = useState(0)
@@ -22,7 +22,7 @@ function Home(){
     const handleSubmit = e => {
         e.preventDefault()
         const id = editId || `snk_${Date.now()}`
-        const snackRef = ref(db, `snack/${id}`)
+        const snackRef = ref(db, `snacks/${id}`)
         set(snackRef, {
             id,
             title: form.title.trim(),
