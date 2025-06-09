@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from "redux";
-import pokemonReducer from '../features/pokemon/pokemonReducer'
+import { pokemonReducer } from '../features/pokemon/pokemonReducer';
 
-let rootReducer = combineReducers({
-    pokemon: pokemonReducer
-})
+const rootReducer = combineReducers({
+  pokemon: pokemonReducer
+});
 
-export let store = createStore(rootReducer)
+export const store = createStore(rootReducer);
