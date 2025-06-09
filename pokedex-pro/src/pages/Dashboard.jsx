@@ -14,7 +14,7 @@ export default function Dashboard(){
         async function fetchData() {
             dispatch({ type: 'SET_LOADING' })
             try {
-                let res = await fetch('https://pokeapi.co/api/v2/pokemon?offset=${offset}=0&limit=20')
+                let res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`)
                 let data = await res.json()
 
                 let details = await Promise.all(data.results.map(p => fetch(p.url).then(res => res.json())))
@@ -45,7 +45,7 @@ export default function Dashboard(){
             <Filters />
             <div className="grid">
                 {list.map(pokemon => (
-                    <Link to={'/details/${pokemon.id}'} key={pokemon.id}>
+                    <Link to={`/details/${pokemon.id}`} key={pokemon.id}>
                         <div 
                             className="card"
                             style={{
@@ -58,7 +58,7 @@ export default function Dashboard(){
                                 <h3>{pokemon.name} {pokemon.base_experience > 100 && '⚡'}</h3>
                                 <p>Exp: {pokemon.base_experience}</p>
                                 <p>Weight: {pokemon.weight}</p>
-                                <p>Types: {pokemon.type.map(t => t.type.name).join(", ")}</p>
+                                <p>Types: {pokemon.types.map(t => t.type.name).join(", ")}</p>
                         </div>
                     </Link>
                 ))}

@@ -9,7 +9,7 @@ export default function DetailPage(){
 
     useEffect(() => {
         async function getDetails() {
-            let res = await fetch('https://pokeapi.co/api/v2/pokemon/${id}')
+            let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
             let data = await res.json()
             setPokemon(data)
             setLoading(false)
