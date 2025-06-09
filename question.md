@@ -64,3 +64,16 @@ src/
 │   └── DetailPage.jsx
 ├── App.jsx
 └── main.jsx
+
+Cannot read properties of null (reading 'useContext')
+TypeError: Cannot read properties of null (reading 'useContext')
+    at exports.useContext (http://localhost:3000/static/js/bundle.js:12684:23)
+    at useInRouterContext (http://localhost:3000/static/js/bundle.js:5666:45)
+    at useRoutesImpl (http://localhost:3000/static/js/bundle.js:5773:13)
+    at useRoutes (http://localhost:3000/static/js/bundle.js:5770:10)
+    at Routes (http://localhost:3000/static/js/bundle.js:6573:10)
+    at react-stack-bottom-frame (http://localhost:3000/static/js/bundle.js:28835:18)
+    at renderWithHooks (http://localhost:3000/static/js/bundle.js:19045:20)
+    at updateFunctionComponent (http://localhost:3000/static/js/bundle.js:20738:17)
+    at beginWork (http://localhost:3000/static/js/bundle.js:21324:16)
+    at runWithFiberInDEV (http://localhost:3000/static/js/bundle.js:16816:68)
